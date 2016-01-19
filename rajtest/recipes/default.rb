@@ -1,11 +1,26 @@
 #
-# Cookbook Name:: rajtest
+# Cookbook Name:: GCT_Oracle11gR2_DB_Prov
 # Recipe:: default
 #
-# Copyright (c) 2016 The Authors, All Rights Reserved.
-directory '/test1' do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  action :create
+# Set up and configure the oracle user.
+include_recipe 'GCT_Oracle11gR2_DB_Prov::oracle_user_config' unless node[:oracle][:rdbms][:is_installed]
+
+## Install dependencies and configure kernel parameters required for oracle rdbms 11204 binaries
+# Node attribute changes for 11204, if default[:oracle][:rdbms][:dbbin_version] is set to 11204
+if node[:oracle][:rdbms][:dbbin_version] == "11.2.0.4"
+include_recipe 'GCT_Oracle11gR2_DB_Prov::deps_install' unless node[:oracle][:rdbms][:is_installed]
 end
+
+# Setting up kernel parameters
+include_recipe 'GCT_Oracle11gR2_DB_Prov::kernel_params' unless node[:oracle][:rdbms][:is_installed]
+
+# Baseline install for Oracle itself
+include_recipe 'GCT_Oracle11gR2_DB_Prov::dbbin' unless node[:oracle][:rdbms][:is_installed]
+
+## Patching oracle binaries to the latest patch
+# Node attribute changes for 12c, if default[:oracle][:rdbms][:dbbin_version] is set to 12c
+#if node[:oracle][:rdbms][:dbbin_version] == "11.2.0.4"
+#  #include_recipe 'oracle::latest_dbpatch' unless node[:oracle][:rdbms][:latest_patch][:is_installed]
+#include_recipe 'GCT_Oracle11gR2_DB_Prov::createdb' 
+#include_recipe 'GCT_Oracle11gR2_DB_Prov::db_latest_patch'
+#end

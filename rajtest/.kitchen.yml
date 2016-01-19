@@ -3,19 +3,13 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_zero
-
-# Uncomment the following verifier to leverage Inspec instead of Busser (the
-# default verifier)
-# verifier:
-#   name: inspec
+  name: chef_solo
 
 platforms:
-  - name: ubuntu-14.04
-  - name: centos-7.1
+   - name: centos-7.1
 
 suites:
   - name: default
     run_list:
-      - recipe[rajtest::default]
+      - recipe[GCT_Oracle11gR2_DB_Prov::default]
     attributes:

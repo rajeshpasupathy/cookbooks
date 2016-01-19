@@ -1,12 +1,12 @@
 #
-# Cookbook Name:: rajtest
+# Cookbook Name:: GCT_Oracle11gR2_DB_Prov
 # Spec:: default
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 require 'spec_helper'
 
-describe 'rajtest::default' do
+describe 'GCT_Oracle11gR2_DB_Prov::default' do
   context 'When all attributes are default, on an unspecified platform' do
     let(:chef_run) do
       runner = ChefSpec::ServerRunner.new

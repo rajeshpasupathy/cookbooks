@@ -1,0 +1,29 @@
+{
+  "name": "Oracle11gR2_Prov",
+  "description": "Installs/Configures Oracle rdbms on RHEL6",
+  "long_description": "Description\n===========\n\nInstalls and configures the Oracle RDBMS, patches it to the latest\nversion and creates databases.\n",
+  "maintainer": "Rajesh",
+  "maintainer_email": "p.rajeshkanna@citi.com",
+  "license": "Apache 2.0",
+  "platforms": {
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "1.2.2"
+}

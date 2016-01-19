@@ -1,0 +1,108 @@
+# 
+# Setup OS 
+#
+
+HZ=100
+MANPATH=/usr/man:/opt/emc/EMCpower/doc
+export PATH=$PATH:/usr/bin
+export OSFLAVOR=`uname`
+
+case $OSFLAVOR in 
+
+    #
+    # Sun
+    #
+
+    Sun*)
+
+         . /oracle/dba/bin/sys_set_env.Sun.sh
+    ;;
+
+    #
+    # AIX IBM RS/6000
+    #
+
+    AIX*)
+
+         . /oracle/dba/bin/sys_set_env.AIX.sh
+    ;;
+
+    Linux*)
+
+         . /oracle/dba/bin/sys_set_env.Linux.sh
+    ;;
+
+esac
+
+#
+# Set up Oracle environment..
+# 
+export ORACLE_BASE=/oracle
+export ORA_CRS_HOME=/oracle/product/crs
+export ORACLE_TERM=vt100
+
+ORATAB_LOCATIONS="/etc/oratab /var/opt/oracle/oratab"
+ORATAB=""
+
+for ORATABFILE in $ORATAB_LOCATIONS
+do
+	
+    #
+    # If oratab exists, then assume oracle is installed..
+    #
+    if [ -f $ORATABFILE ]
+    then
+
+        ORATAB=$ORATABFILE;export ORATAB
+				SIDLIST=`awk -F: '/^[^#]/{printf "%s ", $1}' $ORATAB`
+				export SIDLIST
+
+        #
+        # The first entry in oratab file is default..
+        #
+        grep ":" $ORATABFILE | \
+          sed '/^\#/d;/^$/d' | \
+          head -1 | \
+          awk -F: '{print $1, $2}' | \
+          read sid orahome
+
+        export FIRST_ORACLE_HOME=$orahome
+        export ORACLE_SID=$sid
+				export PATH=$FIRST_ORACLE_HOME/bin:$PATH
+	
+	. /oracle/dba/bin/citi_oraenv > /dev/null 2>/dev/null <<-EOF
+	$ORACLE_SID
+EOF
+
+        unset ORATABFILE
+
+    fi
+done
+
+#
+# Setup SQLPlus 
+#
+SQLPATH=/oracle/dba/sql
+
+
+#
+# Setup OSOP
+#
+OSOP_BASE=/oracle/product/osop
+
+# SQL Backtrack Enviroment Variables
+if [ -f /oracle/admin/sbt_env ]
+then
+	. /oracle/admin/sbt_env
+fi
+
+
+#
+# Common OS
+#
+PATH=$PATH:/usr/openv/netbackup/bin:/oracle/dba/bin
+
+export MANPATH
+export ORACLE_BASE ORACLE_HOME ORACLE_PATH ORACLE_TERM LD_LIBRARY_PATH
+export PATH OSOP_BASE SQLPATH
+export LIBPATH=$ORACLE_HOME/lib32:$LIBPATH
