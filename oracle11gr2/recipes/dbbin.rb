@@ -10,7 +10,6 @@ yum_package 'unzip'
 # in the kernel killing it.
 
 directory "#{node[:oracle][:rdbms][:install_dir]}/database" do
-<<<<<<< HEAD
      owner 'oracle'
      group 'dba'
      mode '0755'
@@ -40,37 +39,6 @@ directory "#{node[:oracle][:rdbms][:install_dir]}/database" do
    group 'dba'
    mode '0644'
  end
-=======
-    owner 'oracle'
-    group 'dba'
-    mode '0755'
-    action :delete
-    recursive true
-  end
-
-# Fetching the install media with curl and unzipping them.
-node[:oracle][:rdbms][:install_files].each do |zip_file|
-  execute "fetch_oracle_media_#{zip_file}" do
-    command "curl -kO #{zip_file}"
-    user 'oracle'
-    group 'dba'
-    cwd node[:oracle][:rdbms][:install_dir]
-  end
-  execute "unzip_oracle_media_#{zip_file}" do
-     command "unzip #{File.basename(zip_file)}"
-     user "oracle"
-     group 'dba'
-     cwd node[:oracle][:rdbms][:install_dir]
-  end
-end
-
-# Filesystem template.
-template "#{node[:oracle][:rdbms][:install_dir]}/db11R24.rsp" do
-  owner 'oracle'
-  group 'dba'
-  mode '0644'
-end
->>>>>>> 991404a58f97c8f78c418afa47c29f60ddcebd42
 
 if node[:oracle][:rdbms][:dbbin_version] == "11.2.0.4"
   bash 'run_rdbms_installer' do
