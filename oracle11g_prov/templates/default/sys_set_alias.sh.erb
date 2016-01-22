@@ -1,0 +1,143 @@
+#
+# Common aliases across **any** OS flavor
+#
+unalias autoload
+unalias l
+unalias ll
+unalias functions
+unalias h
+unalias local
+unalias nohup
+unalias r
+unalias rm
+unalias stop
+unalias suspend
+unalias type
+
+#
+# Oracle aliases
+#
+#if [ -d /archive ]
+#then
+#alias arch='cd /archive/$ORACLE_SID ; pwd'
+#fi
+
+#if [ -d /arch_redo ]
+#then
+#alias arch='cd /arch_redo/$ORACLE_SID ; pwd'
+#fi
+
+#if [ -d /oradbf/arch ]
+#then
+#alias arch='cd /oradbf/arch/$ORACLE_SID ; pwd'
+#fi
+
+#if [ -d /oradb4/archive ]
+#then
+#alias arch='cd /oradb3/archive/$ORACLE_SID ; pwd'
+#fi
+
+alias admin='cd $ORACLE_BASE/admin/$ORACLE_SID'
+alias alert='vi $ORACLE_BASE/admin/$ORACLE_SID/bdump/alert_${ORACLE_SID}.log'
+alias -x bdump='cd $ORACLE_BASE/admin/$ORACLE_SID/bdump'
+alias -x bu='cd $ORA_BACKUP_DIR'
+alias -x cdump='cd $ORACLE_BASE/admin/$ORACLE_SID/cdump'
+alias crs='cd $ORA_CRS_HOME'
+alias -x oh='cd ${ORACLE_HOME}'
+alias -x tns='cd $ORACLE_HOME/network/admin'
+alias -x udump='cd $ORACLE_BASE/admin/$ORACLE_SID/udump'
+alias -x work='cd /oracle/admin/${ORACLE_SID}'
+alias data1='cd /oradbf/data1/$ORACLE_SID ; pwd'
+alias data2='cd /oradbf/data2/$ORACLE_SID ; pwd'
+alias data3='cd /oradbf/data3/$ORACLE_SID ; pwd'
+alias data4='cd /oradbf/data4/$ORACLE_SID ; pwd'
+alias data5='cd /oradbf/data5/$ORACLE_SID ; pwd'
+alias data6='cd /oradbf/data6/$ORACLE_SID ; pwd'
+alias data7='cd /oradbf/data7/$ORACLE_SID ; pwd'
+alias data8='cd /oradbf/data8/$ORACLE_SID ; pwd'
+alias dbs='cd $ORACLE_HOME/dbs'
+alias pfile='vi $ORACLE_BASE/admin/$ORACLE_SID/pfile/init${ORACLE_SID}.ora'
+alias redo1='cd /oradbf/redo1/$ORACLE_SID ; pwd'
+alias redo2='cd /oradbf/redo2/$ORACLE_SID ; pwd'
+alias redo3='cd /oradbf/redo3/$ORACLE_SID ; pwd'
+alias redo4='cd /oradbf/redo4/$ORACLE_SID ; pwd'
+alias rmanlog='cd /oracle/admin/${ORACLE_SID}/rmanlog'
+alias sids='echo "SIDs on this machine are $SIDLIST"'
+alias talert='tail -f $ORACLE_BASE/admin/$ORACLE_SID/bdump/alert_${ORACLE_SID}.log'
+alias tnsl='cd $ORACLE_HOME/network/log'
+alias whichdb="ps -ef | grep ora_pmon | grep -v grep"
+alias arch='cd /oradbf/arch/${ORACLE_SID}' 
+
+#
+# SQL*Plus aliases
+#
+alias sql='sqlplus /nolog'
+alias sqlb='sqlplus /nolog @logon_binh.sql'
+alias sqlbl='sqlplus /nolog @logon_bdelling.sql'
+alias sqlc='sqlplus /nolog @logon_cpace.sql'
+alias sqld='sqlplus /nolog @logon_debrigh.sql'
+alias sqli='sqlplus /nolog @logon_sysdba.sql'
+alias sqlj='sqlplus /nolog @logon_jsander.sql'
+alias sqll='sqlplus /nolog @logon_lneblett.sql'
+alias sqlm='sqlplus /nolog @logon_mamunds.sql'
+
+#
+# Netbackup aliases
+#
+alias -x nblogs="cd /usr/openv/netbackup/logs/user_ops/dbext/logs"
+alias bpconf='cd /usr/openv/netbackup'
+
+#
+# OSP aliases
+#
+alias -x osop="cd $OSOP_BASE"
+
+#
+# OS aliases
+#
+alias dfk='df -k | more'
+alias history='fc -l'
+alias integer='typeset -i'
+alias lsf="ls -F"
+alias orabu='cd /ora_bu'
+alias -x dbab="cd /oracle/dba/bin"
+alias -x dbac="cd /oracle/work/cbin"
+alias -x dbas="cd /oracle/dba/sql"
+alias -x dir="ls -aFC | more"
+alias -x ll="ls -larpt"
+alias who='w | sort'
+
+#
+# Shareplex aliases
+#
+alias sb='cd $SP_SYS_PRODDIR/bin'
+alias sv='cd $SP_SYS_VARDIR'
+
+#
+# SQL Backtrack aliases
+#
+alias sbt="cd $DTBASE/obacktrack/bin"
+
+# Apollo aliases
+alias -x afix="cd /export/work/apollo2_fix"
+alias -x aroll="cd /export/work/apollo2_rolls"
+alias -x arel="cd /export/work/apollo2_rel"
+
+OSFLAVER=`uname`
+case $OSFLAVOR in 
+
+    Sun*)
+          . /oracle/dba/bin/sys_set_alias.Sun.sh
+	  break;
+    ;;
+
+    AIX*)
+          . /oracle/dba/bin/sys_set_alias.AIX.sh
+	  break;
+    ;;
+
+    Linux*)
+         . /oracle/dba/bin/sys_set_alias.Linux.sh
+    ;;
+
+esac         
