@@ -16,7 +16,7 @@ default[:oracle][:ora_inventory] = '/optware/oracle/oraInventory'
 ## Settings specific to the Oracle RDBMS proper.
 default[:oracle][:rdbms][:dbbin_version] = '11.2.0.4'
 default[:oracle][:rdbms][:ora_home] = "#{node[:oracle][:ora_base]}/#{node[:oracle][:rdbms][:dbbin_version]}/db_1"
-default[:oracle][:rdbms][:is_installed] = true
+default[:oracle][:rdbms][:is_installed] = false
 default[:oracle][:rdbms][:install_info] = {}
 default[:oracle][:rdbms][:db_create_template] = 'default_template.dbt'
 
