@@ -21,6 +21,7 @@ include_recipe 'oracle11g_prov::dbbin' unless node[:oracle][:rdbms][:is_installe
 # Node attribute changes for 12c, if default[:oracle][:rdbms][:dbbin_version] is set to 12c
 #if node[:oracle][:rdbms][:dbbin_version] == "11.2.0.4"
 #  #include_recipe 'oracle::latest_dbpatch' unless node[:oracle][:rdbms][:latest_patch][:is_installed]
-include_recipe 'oracle11g_prov::createdb' 
+include_recipe 'oracle11g_prov::createdb'
+#include_recipe 'oracle11g_prov::replace'  
 #include_recipe 'oracle11g_prov::db_latest_patch'
 #end

@@ -101,3 +101,11 @@ ruby_block "ensure required shell limits are set" do
   end
   not_if { Resolv.getaddress "session required pam_limits.so" rescue false }
 end
+
+ruby_block "disabiling tty in /etc/sudoers" do
+  block do
+    fe = Chef::Util::FileEdit.new("/etc/sudoers")
+    fe.search_file_replace("Defaults requiretty", "#Defaults requiretty")
+    fe.write_file
+  end  
+end

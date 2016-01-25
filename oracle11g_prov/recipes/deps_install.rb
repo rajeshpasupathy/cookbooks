@@ -12,6 +12,12 @@
  # group 'root'
 #end
 
+execute "Configure yum repo to install all dependencies" do
+     command "yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional"
+     user "root"
+     group 'root'
+  end
+  
 node[:oracle][:rdbms][:deps].each do |dep|
   yum_package dep
 end
