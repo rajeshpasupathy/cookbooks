@@ -72,7 +72,7 @@ template "#{node[:oracle][:rdbms][:ora_home]}/network/admin/listener.ora" do
  
  # Starting listener 
   execute 'start_listener' do
-    command "#{node[:oracle][:rdbms][:ora_home]}/bin/lsnrctl start"
+    command "#{node[:oracle][:rdbms][:ora_home]}/bin/lsnrctl start listener_1526"
     user 'oracle'
     group 'dba'
     environment (node[:oracle][:rdbms][:env])
